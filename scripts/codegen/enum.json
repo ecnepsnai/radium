@@ -1,0 +1,23 @@
+[
+    {
+        "name": "WidgetType",
+        "type": "string",
+        "values": [
+            {
+                "key": "Gear",
+                "description": "a gear",
+                "value": "\"Gear\""
+            },
+            {
+                "key": "Cog",
+                "description": "a cog",
+                "value": "\"Cog\""
+            },
+            {
+                "key": "Sprocket",
+                "description": "a sprocket",
+                "value": "\"Sprocket\""
+            }
+        ]
+    }
+]

@@ -1,0 +1,7 @@
+[
+    {
+        "name": "FirstRunComplete",
+        "type": "bool",
+        "default": "false"
+    }
+]

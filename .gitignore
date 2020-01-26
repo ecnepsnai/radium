@@ -1,0 +1,36 @@
+# macOS Files
+.DS_Store
+.AppleDouble
+.LSOverride
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+.vscode/
+
+# generated go files
+cbgen_*.go
+
+# logs
+*.log
+
+# executables
+artifacts/
+/radium
+/radium_*
+vendor/
+/data/
+/logs/
+/backup/
+/static/build
+/static/copy
+/static/fonts
+/static/node_modules

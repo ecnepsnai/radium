@@ -1,0 +1,10 @@
+<page-wrapper page-title="{{ ::$ctrl.title }}" ng-if="$ctrl.loaded">
+    <form class="form" name="widgetForm" novalidate ng-submit="$ctrl.save(widgetForm.$valid)">
+        <div class="form-group">
+            <label for="$ctrl.widget.Name">Name</label>
+            <input type="text" class="form-control" name="Name" placeholder="handsome_devil" required id="$ctrl.widget.Name" ng-model="::$ctrl.widget.Name">
+        </div>
+
+        <wait-button title="Save" loading="$ctrl.loading" icon="fas fa-save" click="$ctrl.save(widgetForm.$valid)"></wait-button>
+    </form>
+</page-wrapper>

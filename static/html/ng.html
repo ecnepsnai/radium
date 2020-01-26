@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="radium" ng-controller="radium">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+        <link rel="icon" type="image/png" href="/radiumdev/static/img/logo.png">
+        <link rel="stylesheet" type="text/css" href="/radiumdev/static/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/radiumdev/static/css/fonts.css">
+        <link rel="stylesheet" type="text/css" href="/radiumdev/static/css/bootstrap.min.css">
+        <title>Radium</title>
+        <script type="text/javascript" src="/radiumdev/static/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/radiumdev/static/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="/radiumdev/static/js/angular.min.js"></script>
+        <script type="text/javascript" src="/radiumdev/static/js/angular-route.min.js"></script>
+        <script type="text/javascript" src="/radiumdev/static/js/angular-sanitize.min.js"></script>
+        <script type="text/javascript" src="/radiumdev/static/js/moment.min.js"></script>
+        <script type="text/javascript" src="/radiumdev/static/js/angular-moment.min.js"></script>
+        <script type="text/javascript" src="/radiumdev/static/js/ng.js"></script>
+        <base href="/">
+    </head>
+    <body ng-if="ready" ng-cloak>
+        <nav-bar></nav-bar>
+        <div class="load-wrapper" ng-show="isLoading"><i class="fas fa-spinner fa-pulse"></i></div>
+        <main role="main" class="main" ng-view ng-show="!isLoading"></main>
+        <footer>
+            <p>Radium {{::state.Version}} on {{::state.Hostname}}</p>
+        </footer>
+    </body>
+</html>
