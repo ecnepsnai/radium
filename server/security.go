@@ -1,13 +1,13 @@
 package server
 
 import (
-	gonanoid "github.com/matoous/go-nanoid"
+	"github.com/ecnepsnai/nanoid"
 	uuid "github.com/satori/go.uuid"
 )
 
 // NewID generate a new ID
 func NewID() string {
-	id, err := gonanoid.Generate("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890", 11)
+	id, err := nanoid.Generate("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890", 11)
 	if err != nil {
 		panic(err)
 	}

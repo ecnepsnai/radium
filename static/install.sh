@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-BOOTSTRAP_VERSION="4.3.1"
-FONTAWESOME_VERSION="5.11.2"
+BOOTSTRAP_VERSION="4.4.1"
+FONTAWESOME_VERSION="5.13.0"
 JQUERY_VERSION="3.4.1"
-ANGULARJS_VERSION="1.7.8"
+ANGULARJS_VERSION="1.7.9"
 FONTAWESOME_PRO_KEY="A63F67E6-AE38-494F-AB94-A8ABE3098137"
 
 COLOR_NC='\033[0m'
@@ -23,7 +23,6 @@ BOOTSTRAP_DIR="bootstrap"
 curl -SsL ${BOOSTRAP_URL} > ${BOOTSTRAP_ZIP}
 unzip -q ${BOOTSTRAP_ZIP} -d ${BOOTSTRAP_DIR}
 rm ${BOOTSTRAP_ZIP}
-cp bootstrap/bootstrap-${BOOTSTRAP_VERSION}-dist/css/bootstrap.min.* copy/static/css
 cp bootstrap/bootstrap-${BOOTSTRAP_VERSION}-dist/js/bootstrap.bundle.min.* copy/static/js
 rm -rf bootstrap
 
@@ -42,14 +41,15 @@ CDNJS_URL="https://cdnjs.cloudflare.com/ajax/libs"
 ANGULARJS_URL="${CDNJS_URL}/angular.js/${ANGULARJS_VERSION}"
 cd copy/static/js
 
-curl -Ss -O "${ANGULARJS_URL}/angular-route.min.js"
-curl -Ss -O "${ANGULARJS_URL}/angular-route.min.js.map"
+curl -Ss -O "${CDNJS_URL}/angular-route/${ANGULARJS_VERSION}/angular-route.min.js"
+curl -Ss -O "${CDNJS_URL}/angular-route/${ANGULARJS_VERSION}/angular-route.js.map"
 curl -Ss -O "${CDNJS_URL}/angular-sanitize/${ANGULARJS_VERSION}/angular-sanitize.min.js"
 curl -Ss -O "${CDNJS_URL}/angular-sanitize/${ANGULARJS_VERSION}/angular-sanitize.min.js.map"
 curl -Ss -O "${ANGULARJS_URL}/angular.min.js"
 curl -Ss -O "${ANGULARJS_URL}/angular.min.js.map"
 curl -Ss -O "${CDNJS_URL}/angular-moment/1.2.0/angular-moment.min.js"
-curl -Ss -O "${CDNJS_URL}/moment.js/2.22.0/moment.min.js"
+curl -Ss -O "${CDNJS_URL}/angular-moment/1.3.0/angular-moment.min.js.map"
+curl -Ss -O "${CDNJS_URL}/moment.js/2.24.0/moment.min.js"
 curl -Ss -O "${CDNJS_URL}/jquery/${JQUERY_VERSION}/jquery.min.js"
 curl -Ss -O "${CDNJS_URL}/jquery/${JQUERY_VERSION}/jquery.min.map"
 

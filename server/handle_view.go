@@ -7,7 +7,7 @@ import (
 	"github.com/ecnepsnai/web"
 )
 
-func (v *view) Redirect(request web.Request) (response web.Response) {
+func (v *view) Redirect(request web.Request, writer web.Writer) (response web.Response) {
 	response.Headers = map[string]string{
 		"Location": "/widgets/",
 	}
@@ -15,7 +15,7 @@ func (v *view) Redirect(request web.Request) (response web.Response) {
 	return
 }
 
-func (v *view) AngularJS(request web.Request) web.Response {
+func (v *view) AngularJS(request web.Request, writer web.Writer) web.Response {
 	file, err := os.OpenFile(path.Join(Directories.Static, "build", "ng.html"), os.O_RDONLY, os.ModePerm)
 	if err != nil {
 		panic(err)
