@@ -12,6 +12,7 @@ import (
 
 var tmpDir *string
 var verbose bool
+var offline bool
 
 // Perform all startup actions that are typically done during Start(), except don't start
 // the http router.
@@ -41,12 +42,12 @@ func testSetup() {
 
 	StateSetup()
 	DataStoreSetup()
-
 	LoadOptions()
 }
 
 // Close everything and delete the operating directory
 func testTeardown() {
+	State.Close()
 	DataStoreTeardown()
 	logtic.Close()
 	if tmpDir != nil {
@@ -59,6 +60,8 @@ func TestMain(m *testing.M) {
 	for _, arg := range os.Args {
 		if arg == "-test.v=true" {
 			verbose = true
+		} else if arg == "-test.short=true" {
+			offline = true
 		}
 	}
 

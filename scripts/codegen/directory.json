@@ -1,13 +1,13 @@
 [
     {
         "name": "Logs",
-        "is_data": true,
-        "dir_name": "logs"
+        "dir_name": "logs",
+        "is_data": true
     },
     {
         "name": "Data",
-        "is_data": true,
-        "dir_name": "data"
+        "dir_name": "data",
+        "is_data": true
     },
     {
         "name": "Static",

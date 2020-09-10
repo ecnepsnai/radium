@@ -1,7 +1,7 @@
 [
     {
-        "name": "FirstRunComplete",
-        "type": "bool",
-        "default": "false"
+        "name": "TableVersion",
+        "type": "int",
+        "default": "0"
     }
 ]

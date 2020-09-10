@@ -30,8 +30,8 @@ func preBootstrapArgs() {
 			value := args[i+1]
 			bindAddress = value
 			i++
-		} else if arg == "--no-schedule" {
-			scheduleDisabled = true
+		} else if arg == "--no-scheduler" {
+			cronDisabled = true
 		} else if arg == "-h" || arg == "--help" {
 			printHelpAndExit()
 		}
@@ -50,7 +50,9 @@ func isVerbose() bool {
 	return false
 }
 
-func postBootstrapArgs() {}
+func postBootstrapArgs() {
+
+}
 
 func printHelpAndExit() {
 	fmt.Printf("Usage %s [options]\n", os.Args[0])
@@ -58,6 +60,6 @@ func printHelpAndExit() {
 	fmt.Printf("-d --data-dir <path>        Specify the absolute path to the data directory\n")
 	fmt.Printf("-b --bind-addr <socket>     Specify the listen address for the web server\n")
 	fmt.Printf("-v --verbose                Set the log level to debug\n")
-	fmt.Printf("--no-schedule               Disable all automatic tasks\n")
+	fmt.Printf("--no-scheduler              Disable all automatic tasks\n")
 	os.Exit(1)
 }

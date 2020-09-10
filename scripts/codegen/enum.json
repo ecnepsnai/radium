@@ -4,19 +4,19 @@
         "type": "string",
         "values": [
             {
-                "key": "Gear",
-                "description": "a gear",
-                "value": "\"Gear\""
+                "key": "Whatsit",
+                "description": "Something whose name is unknown or forgotten.",
+                "value": "\"whatsit\""
             },
             {
-                "key": "Cog",
-                "description": "a cog",
-                "value": "\"Cog\""
+                "key": "DooDad",
+                "description": "Something, especially a small device or part, whose name is unknown or forgotten.",
+                "value": "\"doodad\""
             },
             {
-                "key": "Sprocket",
-                "description": "a sprocket",
-                "value": "\"Sprocket\""
+                "key": "Thingamajig",
+                "description": "Something that is hard to classify or whose name is unknown or forgotten.",
+                "value": "\"thingamajig\""
             }
         ]
     }

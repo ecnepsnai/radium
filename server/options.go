@@ -7,30 +7,35 @@ import (
 	"sync"
 )
 
-// E6Options describes options for the Radium server
-type E6Options struct {
-	ExampleString string
-	ExampleBool   bool
+// radiumOptions describes options for the radium server
+type radiumOptions struct {
+	General OptionsGeneral
+}
+
+// OptionsGeneral describes the general options
+type OptionsGeneral struct {
+	ServerURL string
 }
 
 // Options the global options
-var Options *E6Options
+var Options *radiumOptions
 var optionsLock = sync.Mutex{}
 
 // LoadOptions load E6 options
 func LoadOptions() {
-	defaults := E6Options{
-		ExampleString: "Default",
-		ExampleBool:   true,
+	defaults := radiumOptions{
+		General: OptionsGeneral{
+			ServerURL: "http://" + bindAddress + "/",
+		},
 	}
 
-	if !FileExists(path.Join(Directories.Data, "radium.conf")) {
+	if !FileExists(path.Join(Directories.Data, "radium_server.conf")) {
 		Options = &defaults
 		if err := Options.Save(); err != nil {
 			log.Fatal("Error setting default options: %s", err.Error())
 		}
 	} else {
-		f, err := os.OpenFile(path.Join(Directories.Data, "radium.conf"), os.O_RDONLY, os.ModePerm)
+		f, err := os.OpenFile(path.Join(Directories.Data, "radium_server.conf"), os.O_RDONLY, os.ModePerm)
 		if err != nil {
 			log.Fatal("Error opening config file: %s", err.Error())
 		}
@@ -44,11 +49,11 @@ func LoadOptions() {
 }
 
 // Save save the options to disk
-func (o *E6Options) Save() error {
+func (o *radiumOptions) Save() error {
 	optionsLock.Lock()
 	defer optionsLock.Unlock()
 
-	f, err := os.OpenFile(path.Join(Directories.Data, "radium.conf"), os.O_RDWR|os.O_CREATE, os.ModePerm)
+	f, err := os.OpenFile(path.Join(Directories.Data, "radium_server.conf"), os.O_RDWR|os.O_CREATE, os.ModePerm)
 	if err != nil {
 		log.Error("Error opening config file: %s", err.Error())
 		return err

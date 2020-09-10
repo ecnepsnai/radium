@@ -6,6 +6,7 @@ import (
 	"os/signal"
 	"runtime"
 	"syscall"
+	"time"
 
 	"github.com/ecnepsnai/radium/server"
 )
@@ -21,10 +22,11 @@ func main() {
 }
 
 func start() {
-	fmt.Printf("Radium %s (Runtime %s). Copyright Ian Spence 2019 - All rights reserved.\n", server.ServerVersion, runtime.Version())
+	fmt.Printf("radium %s (Runtime %s). Copyright Ian Spence 2020-%d - All rights reserved.\n", server.ServerVersion, runtime.Version(), time.Now().Year())
 	server.Start()
 	stop()
 }
+
 func stop() {
 	fmt.Printf("Shutting down\n")
 	server.Stop()

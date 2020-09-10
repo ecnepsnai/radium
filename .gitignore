@@ -16,17 +16,16 @@ Temporary Items
 .apdisk
 .vscode/
 
-# generated go files
-cbgen_*.go
-
 # logs
 *.log
+
+# Dynamically generated files
+server/cbgen*.go
 
 # executables
 artifacts/
 /radium
 /radium_*
-/go.sum
 /data/
 /logs/
 /backup/
@@ -34,3 +33,4 @@ artifacts/
 /static/copy
 /static/fonts
 /static/node_modules
+/scripts/Docker/

@@ -1,6 +1,8 @@
 package server
 
 import (
+	"strings"
+
 	"github.com/ecnepsnai/web"
 )
 
@@ -9,10 +11,18 @@ func (h *handle) OptionsGet(request web.Request) (interface{}, *web.Error) {
 }
 
 func (h *handle) OptionsSet(request web.Request) (interface{}, *web.Error) {
-	options := E6Options{}
+	options := radiumOptions{}
 
 	if err := request.Decode(&options); err != nil {
 		return nil, web.CommonErrors.BadRequest
+	}
+
+	if !strings.HasPrefix(options.General.ServerURL, "http") {
+		return nil, web.ValidationError("Server URL must include protocol")
+	}
+
+	if !strings.HasSuffix(options.General.ServerURL, "/") {
+		options.General.ServerURL = options.General.ServerURL + "/"
 	}
 
 	if err := options.Save(); err != nil {

@@ -8,6 +8,7 @@ import (
 type Widget struct {
 	ID   string `ds:"primary"`
 	Name string `ds:"unique" min:"1" max:"64"`
+	Type string `ds:"index"`
 }
 
 // Save will save an existing widget

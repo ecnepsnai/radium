@@ -2,6 +2,7 @@ package server
 
 import (
 	"github.com/ecnepsnai/ds"
+	"github.com/ecnepsnai/limits"
 )
 
 func (s widgetStoreObject) AllWidgets() ([]Widget, *Error) {
@@ -72,12 +73,14 @@ func (s widgetStoreObject) WidgetWithName(name string) (*Widget, *Error) {
 // NewWidgetParameters parameters for adding a new widget
 type NewWidgetParameters struct {
 	Name string
+	Type string
 }
 
 // Widget transform the parameters to an widget object
 func (params NewWidgetParameters) Widget() Widget {
 	widget := Widget{
 		Name: params.Name,
+		Type: params.Type,
 	}
 	return widget
 }
@@ -94,6 +97,15 @@ func (s widgetStoreObject) New(params NewWidgetParameters) (*Widget, *Error) {
 
 	widget := params.Widget()
 	widget.ID = NewID()
+
+	if err := limits.Check(widget); err != nil {
+		return nil, ErrorUser(err.Error())
+	}
+
+	if !IsWidgetType(widget.Type) {
+		return nil, ErrorUser("Invalid widget type")
+	}
+
 	if err := widget.Save(); err != nil {
 		return nil, err
 	}
@@ -104,6 +116,7 @@ func (s widgetStoreObject) New(params NewWidgetParameters) (*Widget, *Error) {
 // EditWidgetParameters parameters for editing an widget
 type EditWidgetParameters struct {
 	Name string
+	Type string
 }
 
 func (s widgetStoreObject) Edit(id string, params EditWidgetParameters) (*Widget, *Error) {
@@ -116,6 +129,15 @@ func (s widgetStoreObject) Edit(id string, params EditWidgetParameters) (*Widget
 	}
 
 	widget.Name = params.Name
+	widget.Type = params.Type
+
+	if err := limits.Check(*widget); err != nil {
+		return nil, ErrorUser(err.Error())
+	}
+
+	if !IsWidgetType(widget.Type) {
+		return nil, ErrorUser("Invalid widget type")
+	}
 
 	if err := widget.Save(); err != nil {
 		return nil, err
