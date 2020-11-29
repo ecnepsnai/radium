@@ -10,7 +10,7 @@ import { Notification } from '../../components/Notification';
 export interface OptionsMainProps {}
 interface OptionsMainState {
     loading?: boolean,
-    options: Options.radiumOptions,
+    options: Options.RadiumOptions,
 }
 export class OptionsMain extends React.Component<OptionsMainProps, OptionsMainState> {
     constructor(props: OptionsMainProps) {

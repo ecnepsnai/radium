@@ -9,7 +9,7 @@ var cronDisabled = false
 
 // CronSetup start the cron
 func CronSetup() {
-	schedule := cron.New([]cron.Job{
+	schedule, _ := cron.New([]cron.Job{
 		{
 			Pattern: "0 * * * *",
 			Name:    "CleanupSessions",

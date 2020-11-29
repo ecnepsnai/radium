@@ -9,9 +9,9 @@ export interface PageProps {
 export class Page extends React.Component<PageProps, {}> {
     componentDidMount(): void {
         if (this.props.title) {
-            document.title = this.props.title + ' — radium';
+            document.title = this.props.title + ' — Radium';
         } else {
-            document.title = 'radium';
+            document.title = 'Radium';
         }
     }
     render(): JSX.Element {

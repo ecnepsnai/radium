@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Widget } from '../../types/Widget';
 import { Link } from 'react-router-dom';
-import { Dropdown, MenuItem, MenuLink } from '../../components/Menu';
+import { Dropdown, Menu } from '../../components/Menu';
 import { Style } from '../../components/Style';
 import { Icon } from '../../components/Icon';
 import { Table } from '../../components/Table';
@@ -30,8 +30,9 @@ export class WidgetListItem extends React.Component<WidgetListItemProps, {}> {
                 <td>{ this.props.widget.Type }</td>
                 <td>
                     <Dropdown label={dropdownLabel} button={buttonProps}>
-                        <MenuLink label="Edit" icon={<Icon.Edit />} to={'/widgets/widget/' + this.props.widget.ID + '/edit'}/>
-                        <MenuItem label="Delete" icon={<Icon.Delete />} onClick={this.deleteMenuClick}/>
+                        <Menu.Link label="Edit" icon={<Icon.Edit />} to={'/widgets/widget/' + this.props.widget.ID + '/edit'}/>
+                        <Menu.Divider />
+                        <Menu.Item label="Delete" icon={<Icon.Delete />} onClick={this.deleteMenuClick}/>
                     </Dropdown>
                 </td>
             </Table.Row>

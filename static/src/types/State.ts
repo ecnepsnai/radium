@@ -6,8 +6,8 @@ export class State {
     public readonly Runtime: Runtime;
     public readonly StartDate: string;
     public readonly Hostname: string;
-    public readonly Version: string;
-    public readonly Options: Options.radiumOptions;
+    public readonly Warnings: string[];
+    public readonly Options: Options.RadiumOptions;
     public readonly Enums: {[key: string]: {[key: string]: string;};};
 
     public constructor(json: any) {
@@ -15,9 +15,21 @@ export class State {
         this.Runtime = json.Runtime as Runtime;
         this.StartDate = json.StartDate as string;
         this.Hostname = json.Hostname as string;
-        this.Version = json.Version as string;
-        this.Options = json.Options as Options.radiumOptions;
+        this.Warnings = json.Warnings as string[];
+        this.Options = json.Options as Options.RadiumOptions;
         this.Enums = json.Enums as {[key: string]: {[key: string]: string;};};
+    }
+
+    /**
+     * Get a integer representation of the current system version
+     */
+    public VersionNumber(): number {
+        const version = parseInt(this.Runtime.Version.replace(/\./g, ''));
+        if (isNaN(version)) {
+            return 0;
+        }
+
+        return version;
     }
 }
 

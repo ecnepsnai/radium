@@ -8,21 +8,20 @@ import {
     faCog,
     faEdit,
     faExclamationCircle,
+    faExclamationTriangle,
     faInfoCircle,
     faMinus,
     faPlus,
+    faQuestionCircle,
+    faSignOutAlt,
     faSpinner,
     faStarOfLife,
     faTimesCircle,
     faTrashAlt,
-    faQuestionCircle,
-    faLevelDownAlt,
-    faWrench,
     faUser,
-    faUsers,
     faUserEdit,
-    faSignOutAlt,
-    faExclamationTriangle,
+    faUsers,
+    faWrench,
 } from '@fortawesome/free-solid-svg-icons';
 import '../../css/icon.scss';
 
@@ -55,22 +54,18 @@ export namespace Icon {
     export class Delete extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faTrashAlt} options={this.props}/> );}}
     export class Edit extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faEdit} options={this.props}/> );}}
     export class ExclamationCircle extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faExclamationCircle} options={this.props}/> );}}
+    export class ExclamationTriangle extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faExclamationTriangle} options={this.props}/> );}}
     export class InfoCircle extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faInfoCircle} options={this.props}/> );}}
     export class Minus extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faMinus} options={this.props}/> );}}
     export class Plus extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faPlus} options={this.props}/> );}}
+    export class QuestionCircle extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faQuestionCircle} options={this.props}/> );}}
+    export class SignOut extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faSignOutAlt} options={this.props}/> );}}
     export class Spinner extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faSpinner} options={this.props}/> );}}
     export class TimesCircle extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faTimesCircle} options={this.props}/> );}}
-    export class QuestionCircle extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faQuestionCircle} options={this.props}/> );}}
-    export class Wrench extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faWrench} options={this.props}/> );}}
     export class User extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faUser} options={this.props}/> );}}
-    export class Users extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faUsers} options={this.props}/> );}}
     export class UserEdit extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faUserEdit} options={this.props}/> );}}
-    export class SignOut extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faSignOutAlt} options={this.props}/> );}}
-    export class ExclamationTriangle extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faExclamationTriangle} options={this.props}/> );}}
-
-    export class Descendant extends React.Component<IconProps, {}> {render(): JSX.Element {
-        return ( <span className="descendant-icon"><FontAwesomeIcon icon={faLevelDownAlt} flip="horizontal" transform={{ rotate: 90 }}/></span> );
-    }}
+    export class Users extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faUsers} options={this.props}/> );}}
+    export class Wrench extends React.Component<IconProps, {}> {render(): JSX.Element { return ( <EIcon icon={faWrench} options={this.props}/> );}}
 
     export interface LabelProps { icon: JSX.Element; spin?: boolean; label: string|number; }
     export class Label extends React.Component<LabelProps, {}> {

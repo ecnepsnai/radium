@@ -1,7 +1,7 @@
 import { API } from "../services/API";
 
 export namespace Options {
-    export interface radiumOptions {
+    export interface RadiumOptions {
         General: General;
     }
 
@@ -10,14 +10,14 @@ export namespace Options {
     }
 
     export class Options {
-        public static async Get(): Promise<radiumOptions> {
+        public static async Get(): Promise<RadiumOptions> {
             const results = await API.GET('/api/options');
-            return results as radiumOptions;
+            return results as RadiumOptions;
         }
 
-        public static async Save(options: radiumOptions): Promise<radiumOptions> {
+        public static async Save(options: RadiumOptions): Promise<RadiumOptions> {
             const results = await API.POST('/api/options', options);
-            return results as radiumOptions;
+            return results as RadiumOptions;
         }
     }
 }

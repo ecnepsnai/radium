@@ -1,46 +1,13 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Icon } from './Icon';
 import { StateManager } from '../services/StateManager';
+import { Style } from './Style';
 import { UserManager } from '../pages/options/OptionsUsers';
 import { API } from '../services/API';
 import '../../css/nav.scss';
 
-interface NavProps {}
-interface NavState {
-    active: {[id: string]: boolean};
-}
-export class Nav extends React.Component<NavProps, NavState> {
-    constructor(props: NavProps) {
-        super(props);
-        this.state = {
-            active: {
-                "widgets": false,
-                "groups": false,
-                "scripts": false,
-                "schedules": false,
-                "options": false,
-            },
-        };
-    }
-    componentDidMount(): void {
-        this.updateNavClass();
-
-        document.body.addEventListener('click', () => {
-            setTimeout(() => { this.updateNavClass(); }, 10);
-        });
-    }
-    private updateNavClass = () => {
-        this.setState(state => {
-            state.active.widgets = location.pathname.indexOf('/widgets') > -1;
-            state.active.groups = location.pathname.indexOf('/groups') > -1;
-            state.active.scripts = location.pathname.indexOf('/scripts') > -1;
-            state.active.schedules = location.pathname.indexOf('/schedules') > -1;
-            state.active.options = location.pathname.indexOf('/options') > -1;
-            return state;
-        });
-    }
-
+export class Nav extends React.Component<{}, {}> {
     private editUserClick = () => {
         UserManager.EditCurrentUser().then(() => { StateManager.Refresh(); });
     }
@@ -66,10 +33,10 @@ export class Nav extends React.Component<NavProps, NavState> {
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
-                        <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+                        <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
                             <ul className="navbar-nav">
-                                <NavItem link="/widgets" active={this.state.active.widgets} icon={<Icon.Asterisk />} label="Widgets" />
-                                <NavItem link="/options" active={this.state.active.options} icon={<Icon.Cog />} label="Options" />
+                                <NavItem link="/widget" icon={<Icon.Asterisk />} label="Widgets" />
+                                <NavItem link="/options" icon={<Icon.Cog />} label="Options" />
                             </ul>
                             <ul className="navbar-nav navbar-links">
                                 <li className="nav-item dropdown">
@@ -79,12 +46,23 @@ export class Nav extends React.Component<NavProps, NavState> {
                                     <div className="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="navUserDropdown">
                                         <a className="dropdown-item" onClick={this.editUserClick}><Icon.Label icon={<Icon.UserEdit />} label="Edit User" /></a>
                                         <a className="dropdown-item" onClick={this.logoutClick}><Icon.Label icon={<Icon.SignOut />} label="Log Out" /></a>
+                                        <div className="dropdown-divider"></div>
+                                        <h6 className="dropdown-header">Otto {StateManager.Current().Runtime.Version}</h6>
+                                        <a className="dropdown-item" href={'https://github.com/ecnepsnai/radium/tree/' + StateManager.Current().Runtime.Version + '/docs'} target="_blank" rel="noreferrer">
+                                            <Icon.Label icon={<Icon.InfoCircle color={Style.Palette.Primary} />} label="Documentation" />
+                                        </a>
+                                        <a className="dropdown-item" href="https://github.com/ecnepsnai/radium/issues/new" target="_blank" rel="noreferrer">
+                                            <Icon.Label icon={<Icon.ExclamationCircle color={Style.Palette.Danger} />} label="Report an Issue" />
+                                        </a>
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
+                { StateManager.Current().Warnings.map((warn, idx) => {
+                    return ( <Warning warning={warn} key={idx} /> );
+                }) }
             </header>
         );
     }
@@ -94,20 +72,46 @@ interface NavItemProps {
     link: string;
     icon: JSX.Element;
     label: string;
-    active: boolean;
 }
 class NavItem extends React.Component<NavItemProps, {}> {
+    constructor(props: NavItemProps) {
+        super(props);
+    }
+
     render(): JSX.Element {
-        let className = 'nav-link';
-        if (this.props.active) {
-            className += ' active';
-        }
         return (
-        <li className="nav-item">
-            <Link to={this.props.link} className={className} data-target=".navbar-collapse.show" data-toggle="collapse">
-                <Icon.Label icon={this.props.icon} label={this.props.label} />
-            </Link>
-        </li>
+            <NavLink to={this.props.link} className="nav-link" activeClassName="active">
+                <li className="nav-item" data-target=".navbar-collapse.show" data-toggle="collapse">
+                    <Icon.Label icon={this.props.icon} label={this.props.label} />
+                </li>
+            </NavLink>
+        );
+    }
+}
+
+interface WarningProps {
+    warning: string;
+}
+class Warning extends React.Component<WarningProps, {}> {
+    render(): JSX.Element {
+        let title = '';
+        let body = '';
+
+        if (this.props.warning === 'default_user_password') {
+            title = 'Default Password';
+            body = 'You are using the default username and password. You should change your password immediately using the user menu in the top-right.';
+        }
+
+        return (
+            <div className="warning">
+                <Icon.ExclamationTriangle />
+                <strong className="ml-1">
+                    {title}
+                </strong>
+                <span className="ml-1">
+                    {body}
+                </span>
+            </div>
         );
     }
 }

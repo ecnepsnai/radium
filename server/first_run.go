@@ -6,24 +6,20 @@ var defaultUser = newUserParameters{
 	Password: "admin",
 }
 
-func isFirstRun() bool {
-	numberOfUsers := 0
-
+func atLeastOneUser() bool {
 	users, err := UserStore.AllUsers()
 	if err != nil {
-		log.Fatal("Error creating default user: %s", err.Message)
+		panic(err)
 	}
-	numberOfUsers = len(users)
-
-	return numberOfUsers == 0
+	return len(users) > 0
 }
 
 func checkFirstRun() {
-	if !isFirstRun() {
-		return
-	}
-
-	if _, err := UserStore.NewUser(defaultUser); err != nil {
-		log.Fatal("Unable to make default user: %s", err.Message)
+	if !atLeastOneUser() {
+		log.Warn("Creating default user")
+		_, err := UserStore.NewUser(defaultUser)
+		if err != nil {
+			log.Fatal("Unable to make default user: %s", err.Message)
+		}
 	}
 }

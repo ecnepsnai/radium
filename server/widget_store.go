@@ -96,7 +96,7 @@ func (s widgetStoreObject) New(params NewWidgetParameters) (*Widget, *Error) {
 	}
 
 	widget := params.Widget()
-	widget.ID = NewID()
+	widget.ID = newID()
 
 	if err := limits.Check(widget); err != nil {
 		return nil, ErrorUser(err.Error())

@@ -22,7 +22,16 @@ export class OptionsGeneral extends React.Component<OptionsGeneralProps, Options
     }
 
     private originWarning = () => {
-        if (location.origin === this.props.defaultValue.ServerURL) {
+        let origin = location.origin;
+        if (!origin.endsWith('/')) {
+            origin = origin + '/';
+        }
+        let serverURL = this.props.defaultValue.ServerURL;
+        if (!serverURL.endsWith('/')) {
+            serverURL = serverURL + '/';
+        }
+
+        if (origin === serverURL) {
             return null;
         }
 
@@ -54,9 +63,9 @@ export class OptionsGeneral extends React.Component<OptionsGeneralProps, Options
                 <Card.Body>
                     <Input
                         type="text"
-                        label="radium Server URL"
-                        placeholder="https://radium.example.com/"
-                        helpText="The absolute URL (Including protocol) where this radium server is accessed from"
+                        label="Otto Server URL"
+                        placeholder="https://otto.example.com/"
+                        helpText="The absolute URL (Including protocol) where this otto server is accessed from"
                         defaultValue={this.state.value.ServerURL}
                         onChange={this.changeServerURL} />
                     { this.originWarning() }
